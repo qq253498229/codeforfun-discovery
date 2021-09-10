@@ -84,7 +84,6 @@ public class ServiceClientAutoConfiguration implements BeanDefinitionRegistryPos
             Object proxy = getProxy(client, clientInstance);
             // register this proxy into spring bean factory
             beanFactory.registerSingleton(beanName, proxy);
-            System.out.println(1);
         }
     }
 
