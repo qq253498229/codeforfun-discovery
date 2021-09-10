@@ -1,0 +1,8 @@
+server:
+  port: 50011
+spring:
+  application:
+    name: client-producer
+  cloud:
+    nacos:
+      server-addr: localhost:8848

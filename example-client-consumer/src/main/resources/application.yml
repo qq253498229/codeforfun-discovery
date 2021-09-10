@@ -1,0 +1,8 @@
+server:
+  port: 50021
+spring:
+  application:
+    name: client-consumer
+#logging:
+#  level:
+#    root: debug
