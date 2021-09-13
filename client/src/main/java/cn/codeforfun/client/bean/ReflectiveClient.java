@@ -2,14 +2,17 @@ package cn.codeforfun.client.bean;
 
 import cn.codeforfun.client.annotation.ServiceClient;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Data
+@Slf4j
 public class ReflectiveClient implements InvocationHandler {
 
     private Class<?> type;
@@ -31,10 +34,9 @@ public class ReflectiveClient implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        log.info("ip:{},name:{},url:{}", InetAddress.getLocalHost().getHostAddress(), getName(), getUrl());
         Map<Method, MethodHandle> dispatch = getDispatch();
         Class<?> type = getType();
-        String name = getName();
-        String url = getUrl();
         ServiceClient annotation = type.getAnnotation(ServiceClient.class);
         return null;
     }
