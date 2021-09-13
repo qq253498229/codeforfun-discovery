@@ -25,6 +25,7 @@
         <module>core</module>
         <module>client</module>
         <module>server</module>
+        <module>server-implement/server-mysql</module>
         <module>example/example-client-producer</module>
         <module>example/example-client-consumer</module>
         <module>example/example-server</module>
