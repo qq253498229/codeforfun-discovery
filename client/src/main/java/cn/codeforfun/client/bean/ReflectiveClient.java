@@ -36,6 +36,8 @@ public class ReflectiveClient implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("ip:{},name:{},url:{}", InetAddress.getLocalHost().getHostAddress(), getName(), getUrl());
         Map<Method, MethodHandle> dispatch = getDispatch();
+        int size = dispatch.size();
+        log.info("dispatch size:{}", size);
         Class<?> type = getType();
         ServiceClient annotation = type.getAnnotation(ServiceClient.class);
         return null;
