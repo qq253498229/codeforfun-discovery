@@ -66,17 +66,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <repositories>
-        <repository>
-            <id>local</id>
-            <url>http://192.168.112.62:8081/repository/maven-public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>local</id>
-            <url>http://192.168.112.62:8081/repository/maven-public/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
