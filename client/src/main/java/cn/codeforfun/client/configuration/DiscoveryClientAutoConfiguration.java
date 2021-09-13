@@ -28,7 +28,7 @@ public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryP
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        // get main configuration class
+        // get main annotation
         EnableDiscoveryClient annotation = getConfiguration(beanFactory);
         if (annotation == null) {
             return;
