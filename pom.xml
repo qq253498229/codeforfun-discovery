@@ -25,9 +25,9 @@
         <module>core</module>
         <module>client</module>
         <module>server</module>
-        <module>example-client-producer</module>
-        <module>example-client-consumer</module>
-        <module>example-server</module>
+        <module>example/example-client-producer</module>
+        <module>example/example-client-consumer</module>
+        <module>example/example-server</module>
     </modules>
 
     <dependencyManagement>
@@ -53,6 +53,16 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>server</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.7.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

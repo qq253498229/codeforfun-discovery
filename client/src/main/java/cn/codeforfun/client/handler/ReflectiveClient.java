@@ -1,4 +1,4 @@
-package cn.codeforfun.client.bean;
+package cn.codeforfun.client.handler;
 
 import cn.codeforfun.client.annotation.DiscoveryClient;
 import lombok.Data;

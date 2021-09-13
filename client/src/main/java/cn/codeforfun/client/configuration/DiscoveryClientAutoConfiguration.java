@@ -2,7 +2,7 @@ package cn.codeforfun.client.configuration;
 
 import cn.codeforfun.client.annotation.EnableDiscoveryClient;
 import cn.codeforfun.client.annotation.DiscoveryClient;
-import cn.codeforfun.client.bean.ReflectiveClient;
+import cn.codeforfun.client.handler.ReflectiveClient;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.SubTypesScanner;
