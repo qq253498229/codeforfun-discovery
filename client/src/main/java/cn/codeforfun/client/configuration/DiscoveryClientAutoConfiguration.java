@@ -1,7 +1,7 @@
 package cn.codeforfun.client.configuration;
 
 import cn.codeforfun.client.annotation.EnableDiscoveryClient;
-import cn.codeforfun.client.annotation.ServiceClient;
+import cn.codeforfun.client.annotation.DiscoveryClient;
 import cn.codeforfun.client.bean.ReflectiveClient;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -40,7 +40,7 @@ public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryP
     }
 
     private EnableDiscoveryClient getConfiguration(ConfigurableListableBeanFactory beanFactory) {
-        // get bean with annotation "EnableServiceClient"
+        // get bean with annotation "EnableDiscoveryClient"
         Map<String, Object> beansWithAnnotation = beanFactory.getBeansWithAnnotation(EnableDiscoveryClient.class);
         if (beansWithAnnotation.isEmpty()) {
             return null;
@@ -62,8 +62,8 @@ public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryP
                     new SubTypesScanner(false),
                     new TypeAnnotationsScanner(),
                     new FieldAnnotationsScanner());
-            // get class set with annotation "ServiceClient"
-            Set<Class<?>> classes = new HashSet<>(reflections.getTypesAnnotatedWith(ServiceClient.class));
+            // get class set with annotation "DiscoveryClient"
+            Set<Class<?>> classes = new HashSet<>(reflections.getTypesAnnotatedWith(DiscoveryClient.class));
             // add to result
             result.addAll(classes);
         }

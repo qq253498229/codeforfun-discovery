@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceClient {
+public @interface DiscoveryClient {
 
     @AliasFor("name")
     String value() default "";

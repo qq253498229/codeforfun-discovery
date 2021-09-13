@@ -1,6 +1,6 @@
 package cn.codeforfun.client.bean;
 
-import cn.codeforfun.client.annotation.ServiceClient;
+import cn.codeforfun.client.annotation.DiscoveryClient;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,7 +26,7 @@ public class ReflectiveClient implements InvocationHandler {
 
     public static ReflectiveClient build(Class<?> client) {
         ReflectiveClient result = new ReflectiveClient();
-        String serviceName = client.getAnnotation(ServiceClient.class).value();
+        String serviceName = client.getAnnotation(DiscoveryClient.class).value();
         result.setType(client);
         result.setName(serviceName);
         return result;
@@ -39,7 +39,7 @@ public class ReflectiveClient implements InvocationHandler {
         int size = dispatch.size();
         log.info("dispatch size:{}", size);
         Class<?> type = getType();
-        ServiceClient annotation = type.getAnnotation(ServiceClient.class);
+        DiscoveryClient annotation = type.getAnnotation(DiscoveryClient.class);
         return null;
     }
 }
