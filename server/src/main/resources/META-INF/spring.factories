@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#cn.codeforfun.client.configuration.DiscoveryClientAutoConfiguration
+cn.codeforfun.server.configuration.DiscoveryServerAutoConfiguration

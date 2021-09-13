@@ -1,0 +1,9 @@
+version: "3"
+services:
+  example-server:
+    image: test:latest
+    build:
+      context: example-server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
