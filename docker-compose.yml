@@ -3,7 +3,7 @@ services:
   example-server:
     image: test:latest
     build:
-      context: example-server
+      context: example/example-server
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
