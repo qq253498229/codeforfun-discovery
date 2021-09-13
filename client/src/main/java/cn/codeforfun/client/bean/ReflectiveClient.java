@@ -6,6 +6,7 @@ import lombok.Data;
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Data
@@ -15,12 +16,12 @@ public class ReflectiveClient implements InvocationHandler {
     private String name;
     private String url;
 
-    private Map<Method, MethodHandle> dispatch;
+    private Map<Method, MethodHandle> dispatch = new LinkedHashMap<>();
 
     public ReflectiveClient() {
     }
 
-    public static ReflectiveClient build(Class<?> client){
+    public static ReflectiveClient build(Class<?> client) {
         ReflectiveClient result = new ReflectiveClient();
         String serviceName = client.getAnnotation(ServiceClient.class).value();
         result.setType(client);
@@ -30,6 +31,11 @@ public class ReflectiveClient implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Map<Method, MethodHandle> dispatch = getDispatch();
+        Class<?> type = getType();
+        String name = getName();
+        String url = getUrl();
+        ServiceClient annotation = type.getAnnotation(ServiceClient.class);
         return null;
     }
 }
