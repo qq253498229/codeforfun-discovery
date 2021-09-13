@@ -1,13 +1,13 @@
 package com.example;
 
-import cn.codeforfun.client.annotation.EnableDiscoveryClient;
+import cn.codeforfun.server.annotation.EnableDiscoveryServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableDiscoveryClient({"com.example.test"})
-public class ConsumerClientApplication {
+@EnableDiscoveryServer
+public class ServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConsumerClientApplication.class, args);
+        SpringApplication.run(ServerApplication.class, args);
     }
 }

@@ -1,6 +1,6 @@
 package cn.codeforfun.client.configuration;
 
-import cn.codeforfun.client.annotation.EnableServiceClient;
+import cn.codeforfun.client.annotation.EnableDiscoveryClient;
 import cn.codeforfun.client.annotation.ServiceClient;
 import cn.codeforfun.client.bean.ReflectiveClient;
 import org.reflections.Reflections;
@@ -20,7 +20,7 @@ import java.lang.reflect.Proxy;
 import java.util.*;
 
 @Configuration
-public class ServiceClientAutoConfiguration implements BeanDefinitionRegistryPostProcessor {
+public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryPostProcessor {
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
@@ -29,7 +29,7 @@ public class ServiceClientAutoConfiguration implements BeanDefinitionRegistryPos
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         // get main configuration class
-        EnableServiceClient annotation = getConfiguration(beanFactory);
+        EnableDiscoveryClient annotation = getConfiguration(beanFactory);
         if (annotation == null) {
             return;
         }
@@ -39,9 +39,9 @@ public class ServiceClientAutoConfiguration implements BeanDefinitionRegistryPos
         registerClients(beanFactory, clientList);
     }
 
-    private EnableServiceClient getConfiguration(ConfigurableListableBeanFactory beanFactory) {
+    private EnableDiscoveryClient getConfiguration(ConfigurableListableBeanFactory beanFactory) {
         // get bean with annotation "EnableServiceClient"
-        Map<String, Object> beansWithAnnotation = beanFactory.getBeansWithAnnotation(EnableServiceClient.class);
+        Map<String, Object> beansWithAnnotation = beanFactory.getBeansWithAnnotation(EnableDiscoveryClient.class);
         if (beansWithAnnotation.isEmpty()) {
             return null;
         }
@@ -49,10 +49,10 @@ public class ServiceClientAutoConfiguration implements BeanDefinitionRegistryPos
         // get first configuration class
         Map.Entry<String, Object> configurationClass = beansWithAnnotation.entrySet().iterator().next();
         // return this annotation
-        return AnnotationUtils.findAnnotation(configurationClass.getValue().getClass(), EnableServiceClient.class);
+        return AnnotationUtils.findAnnotation(configurationClass.getValue().getClass(), EnableDiscoveryClient.class);
     }
 
-    private List<Class<?>> getClient(EnableServiceClient annotation) {
+    private List<Class<?>> getClient(EnableDiscoveryClient annotation) {
         List<Class<?>> result = new ArrayList<>();
         // get base packages string array
         String[] basePackages = annotation.basePackages();

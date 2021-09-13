@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface EnableServiceClient {
+public @interface EnableDiscoveryClient {
     @AliasFor("basePackages")
     String[] value() default {};
 
