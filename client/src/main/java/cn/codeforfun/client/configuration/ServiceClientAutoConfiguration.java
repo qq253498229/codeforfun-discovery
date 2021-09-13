@@ -1,4 +1,4 @@
-package cn.codeforfun.client.annotation.impl;
+package cn.codeforfun.client.configuration;
 
 import cn.codeforfun.client.annotation.EnableServiceClient;
 import cn.codeforfun.client.annotation.ServiceClient;
