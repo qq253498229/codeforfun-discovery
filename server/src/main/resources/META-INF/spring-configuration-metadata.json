@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "discovery.server",
+      "type": "cn.codeforfun.server.constants.DiscoveryServerProperties",
+      "sourceType": "cn.codeforfun.server.constants.DiscoveryServerProperties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
