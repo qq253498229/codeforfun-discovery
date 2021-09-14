@@ -4,10 +4,6 @@ import java.util.List;
 
 public class MySQLHandler implements DataHandler {
 
-    public MySQLHandler() {
-        System.out.println(1);
-    }
-
     @Override
     public List<MicroService> findServerList() {
         return null;
