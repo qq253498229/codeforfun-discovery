@@ -1,11 +1,12 @@
 package cn.codeforfun.server.data;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
 public class MySQLHandler implements DataHandler {
+
+    public MySQLHandler() {
+        System.out.println(1);
+    }
 
     @Override
     public List<MicroService> findServerList() {

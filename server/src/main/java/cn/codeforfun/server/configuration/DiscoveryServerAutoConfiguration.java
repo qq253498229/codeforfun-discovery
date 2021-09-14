@@ -1,7 +1,9 @@
 package cn.codeforfun.server.configuration;
 
 import cn.codeforfun.server.annotation.EnableDiscoveryServer;
-import cn.hutool.core.net.NetUtil;
+import cn.codeforfun.server.data.DataContext;
+import cn.codeforfun.server.data.DataHandler;
+import cn.codeforfun.server.data.exception.DataHandlerNotFoundException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -21,8 +23,11 @@ public class DiscoveryServerAutoConfiguration implements BeanDefinitionRegistryP
         if (annotation == null) {
             return;
         }
-        String localhostIp = NetUtil.getLocalhostStr();
-        System.out.println(localhostIp);
+        DataHandler dataHandler = beanFactory.getBeanProvider(DataHandler.class).getIfAvailable();
+        if (dataHandler == null) {
+            throw new DataHandlerNotFoundException("DataHandler not found, you must import a server implement dependency or implement it manually.");
+        }
+        beanFactory.registerSingleton("dataContext", new DataContext(dataHandler));
     }
 
     private EnableDiscoveryServer getConfiguration(ConfigurableListableBeanFactory beanFactory) {
@@ -40,6 +45,5 @@ public class DiscoveryServerAutoConfiguration implements BeanDefinitionRegistryP
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-
     }
 }
