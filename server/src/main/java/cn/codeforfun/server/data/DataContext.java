@@ -4,7 +4,9 @@ public class DataContext implements Runnable {
 
     private DataHandler dataHandler;
 
-    private DataContext() {
+    @Override
+    public void run() {
+
     }
 
     public DataContext(DataHandler dataHandler) {
@@ -12,8 +14,6 @@ public class DataContext implements Runnable {
         run();
     }
 
-    @Override
-    public void run() {
-
+    private DataContext() {
     }
 }
