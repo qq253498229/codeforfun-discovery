@@ -24,7 +24,7 @@ public class DataContext {
         MicroService microService = new MicroService();
         String applicationName = discoveryServerProperties.getName() == null ? environment.getProperty("spring.application.name") : discoveryServerProperties.getName();
         if (applicationName == null) {
-            throw new ServiceNameNotFoundException("");
+            throw new ServiceNameNotFoundException("Service name not found, you must set discovery.server.name or spring.application.name first.");
         }
         dataHandler.registerService(microService);
     }
