@@ -5,6 +5,7 @@ import cn.codeforfun.server.data.DataContext;
 import cn.codeforfun.server.data.DataHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -17,12 +18,15 @@ public class DataHandlerConfiguration {
     DataHandler dataHandler;
     @Resource
     DataContext dataContext;
+    @Resource
+    Environment environment;
 
     @PostConstruct
     @ConditionalOnBean(DataContext.class)
     public void startDataContext() {
         dataContext.setDataHandler(dataHandler);
         dataContext.setDiscoveryServerProperties(discoveryServerProperties);
+        dataContext.setEnvironment(environment);
         dataContext.start();
     }
 

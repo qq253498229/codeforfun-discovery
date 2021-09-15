@@ -6,6 +6,8 @@ import java.util.List;
  * 服务处理接口，需要手动实现
  */
 public interface DataHandler {
+    int registerService(MicroService microService);
+
     /**
      * 获取服务（服务端）列表
      *

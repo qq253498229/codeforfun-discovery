@@ -1,4 +1,4 @@
-package cn.codeforfun.server.data.exception;
+package cn.codeforfun.server.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

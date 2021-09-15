@@ -4,7 +4,7 @@ import cn.codeforfun.server.annotation.EnableDiscoveryServer;
 import cn.codeforfun.server.constants.DiscoveryServerProperties;
 import cn.codeforfun.server.data.DataContext;
 import cn.codeforfun.server.data.DataHandler;
-import cn.codeforfun.server.data.exception.DataHandlerNotFoundException;
+import cn.codeforfun.server.exception.DataHandlerNotFoundException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
