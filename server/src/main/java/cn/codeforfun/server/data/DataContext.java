@@ -9,9 +9,20 @@ public class DataContext {
     private DiscoveryServerProperties discoveryServerProperties;
 
     public void start() {
-        // todo
+        startVoteTask();
+        startServerTask();
+    }
+
+    /**
+     * 开启选举任务
+     */
+    public void startVoteTask() {
         System.out.println(1);
     }
 
-
+    /**
+     * 开启服务端任务
+     */
+    private void startServerTask() {
+    }
 }
