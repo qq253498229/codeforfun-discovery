@@ -1,6 +1,7 @@
 package cn.codeforfun.server.configuration;
 
 import cn.codeforfun.server.annotation.EnableDiscoveryServer;
+import cn.codeforfun.server.constants.DiscoveryServerProperties;
 import cn.codeforfun.server.data.DataContext;
 import cn.codeforfun.server.data.DataHandler;
 import cn.codeforfun.server.data.exception.DataHandlerNotFoundException;
@@ -9,11 +10,13 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AnnotationUtils;
 
 import java.util.Map;
 
 @Configuration
+@Import(DiscoveryServerProperties.class)
 public class DiscoveryServerAutoConfiguration implements BeanDefinitionRegistryPostProcessor {
 
     @Override
@@ -27,7 +30,7 @@ public class DiscoveryServerAutoConfiguration implements BeanDefinitionRegistryP
         if (dataHandler == null) {
             throw new DataHandlerNotFoundException("DataHandler not found, you must import a server implement dependency or implement it manually.");
         }
-        beanFactory.registerSingleton("dataContext", new DataContext(dataHandler));
+        beanFactory.registerSingleton("dataContext", new DataContext());
     }
 
     private EnableDiscoveryServer getConfiguration(ConfigurableListableBeanFactory beanFactory) {

@@ -1,31 +1,17 @@
 package cn.codeforfun.server.data;
 
 import cn.codeforfun.server.constants.DiscoveryServerProperties;
-import cn.hutool.cron.CronUtil;
-import cn.hutool.cron.task.Task;
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
-import javax.annotation.Resource;
-
-@Component
-public class DataContext implements Runnable {
-    @Resource
-    DiscoveryServerProperties discoveryServerProperties;
-
+@Data
+public class DataContext {
     private DataHandler dataHandler;
+    private DiscoveryServerProperties discoveryServerProperties;
 
-    @Override
-    public void run() {
-        CronUtil.schedule("", (Task) () -> {
-            System.out.println(1);
-        });
+    public void start() {
+        // todo
+        System.out.println(1);
     }
 
-    public DataContext(DataHandler dataHandler) {
-        this.dataHandler = dataHandler;
-        run();
-    }
 
-    private DataContext() {
-    }
 }
