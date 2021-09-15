@@ -6,6 +6,13 @@
       "sourceType": "cn.codeforfun.server.constants.DiscoveryServerProperties"
     }
   ],
-  "properties": [],
+  "properties": [
+    {
+      "name": "discovery.server.health-check-interval",
+      "type": "java.lang.Integer",
+      "description": "健康检查间隔。单位: 秒",
+      "sourceType": "cn.codeforfun.server.constants.DiscoveryServerProperties"
+    }
+  ],
   "hints": []
 }
