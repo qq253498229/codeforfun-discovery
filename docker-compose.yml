@@ -1,9 +1,9 @@
 version: "3"
 services:
-  example-server:
+  consumer:
     image: test:latest
     build:
-      context: example/example-server
+      context: example/example-client-consumer
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
