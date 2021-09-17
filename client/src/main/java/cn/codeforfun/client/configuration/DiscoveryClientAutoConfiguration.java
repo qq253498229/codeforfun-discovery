@@ -1,7 +1,10 @@
 package cn.codeforfun.client.configuration;
 
-import cn.codeforfun.client.annotation.EnableDiscoveryClient;
 import cn.codeforfun.client.annotation.DiscoveryClient;
+import cn.codeforfun.client.annotation.EnableDiscoveryClient;
+import cn.codeforfun.client.data.DataContext;
+import cn.codeforfun.client.data.DataHandler;
+import cn.codeforfun.client.exception.DataHandlerNotFoundException;
 import cn.codeforfun.client.handler.ReflectiveClient;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -23,16 +26,17 @@ import java.util.*;
 public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryPostProcessor {
 
     @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-    }
-
-    @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         // get main annotation
         EnableDiscoveryClient annotation = getConfiguration(beanFactory);
         if (annotation == null) {
             return;
         }
+        DataHandler dataHandler = beanFactory.getBeanProvider(DataHandler.class).getIfAvailable();
+        if (dataHandler == null) {
+            throw new DataHandlerNotFoundException("DataHandler not found, you must import a server implement dependency or implement it manually.");
+        }
+        beanFactory.registerSingleton("dataContext", new DataContext());
         // scan all service client
         List<Class<?>> clientList = getClient(annotation);
         // register these clients into beanFactory
@@ -89,5 +93,9 @@ public class DiscoveryClientAutoConfiguration implements BeanDefinitionRegistryP
 
     public <T> T getProxy(Class<T> clazz, InvocationHandler handler) {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, handler);
+    }
+
+    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
     }
 }

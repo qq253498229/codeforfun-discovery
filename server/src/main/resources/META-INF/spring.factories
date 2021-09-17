@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.codeforfun.server.configuration.DiscoveryServerAutoConfiguration,\
-cn.codeforfun.server.configuration.DataHandlerConfiguration

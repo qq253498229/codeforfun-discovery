@@ -24,11 +24,9 @@
     <modules>
         <module>core</module>
         <module>client</module>
-        <module>server</module>
-        <module>server-implement/server-mysql</module>
+        <module>client-implement/client-mysql</module>
         <module>example/example-client-producer</module>
         <module>example/example-client-consumer</module>
-        <module>example/example-server</module>
     </modules>
 
     <dependencyManagement>
@@ -52,12 +50,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>server-mysql</artifactId>
+                <artifactId>client-mysql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
