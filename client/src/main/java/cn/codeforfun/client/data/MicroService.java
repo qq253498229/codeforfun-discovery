@@ -16,15 +16,13 @@ public class MicroService {
      */
     private String remark;
     /**
-     * 是否是服务端。
-     * 默认：否
+     * 地址
      */
-    private Boolean isServer;
+    private String host;
     /**
-     * 是否是主机。
-     * 只有是服务端的时候才能是主机
+     * 端口
      */
-    private Boolean isMaster;
+    private Integer port;
     /**
      * 上次活跃时间
      */
