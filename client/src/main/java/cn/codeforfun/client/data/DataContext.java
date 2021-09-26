@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class DataContext implements DiscoveryClient {
-    private Map<String, Set<cn.codeforfun.client.data.ServiceInstance>> instances = new HashMap<>();
+    private Map<String, List<cn.codeforfun.client.data.ServiceInstance>> instances = new HashMap<>();
 
     @Override
     public String description() {
@@ -20,7 +20,7 @@ public class DataContext implements DiscoveryClient {
 
     @Override
     public List<ServiceInstance> getInstances(String serviceId) {
-        Set<cn.codeforfun.client.data.ServiceInstance> serviceInstances = instances.get(serviceId);
+        List<cn.codeforfun.client.data.ServiceInstance> serviceInstances = instances.get(serviceId);
         if (ObjectUtils.isEmpty(serviceInstances)) {
             return new ArrayList<>();
         }
@@ -63,13 +63,6 @@ public class DataContext implements DiscoveryClient {
     }
 
     public void refreshServiceInstances(List<cn.codeforfun.client.data.ServiceInstance> serviceInstanceList) {
-        for (cn.codeforfun.client.data.ServiceInstance instance : serviceInstanceList) {
-            String key = instance.getName();
-            if (this.instances.containsKey(key)) {
-                this.instances.get(key).add(instance);
-            } else {
-                this.instances.put(key, new HashSet<>(Collections.singletonList(instance)));
-            }
-        }
+        this.instances = serviceInstanceList.stream().collect(Collectors.groupingBy(cn.codeforfun.client.data.ServiceInstance::getName));
     }
 }
