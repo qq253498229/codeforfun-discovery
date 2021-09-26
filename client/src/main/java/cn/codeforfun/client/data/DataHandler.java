@@ -7,14 +7,14 @@ public interface DataHandler {
     /**
      * 注册服务
      *
-     * @param serviceInstance 服务示例对象
+     * @param serviceInstance 服务实例对象
      */
     void registerService(ServiceInstance serviceInstance);
 
     /**
      * 激活服务
      *
-     * @param serviceInstance 服务示例对象
+     * @param serviceInstance 服务实例对象
      */
     void activeService(ServiceInstance serviceInstance);
 }
