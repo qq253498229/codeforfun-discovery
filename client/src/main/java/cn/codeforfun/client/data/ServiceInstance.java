@@ -6,7 +6,6 @@ import java.util.Date;
 
 @Data
 public class ServiceInstance {
-    private Long id;
     /**
      * 服务名
      */
@@ -24,7 +23,7 @@ public class ServiceInstance {
      */
     private Integer port;
     /**
-     * 上次活跃时间
+     * 上次激活时间
      */
     private Date lastActive;
 }

@@ -13,6 +13,14 @@ public class DiscoveryServiceProperties {
      */
     private Integer serviceActiveInterval = 10;
     /**
+     * 刷新服务列表间隔。单位: 秒
+     */
+    private Integer refreshServiceListInterval = 20;
+    /**
+     * 服务激活超时时间。单位: 秒
+     */
+    private Integer serviceActiveTimeout = 10;
+    /**
      * 服务名。如果没设置的话会取 (spring.application.name) 的值
      */
     private String name;

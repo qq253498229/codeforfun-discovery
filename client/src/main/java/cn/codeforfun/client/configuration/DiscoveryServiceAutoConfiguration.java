@@ -8,18 +8,18 @@ import cn.codeforfun.client.exception.ServiceNameNotFoundException;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.cron.CronUtil;
 import cn.hutool.cron.task.Task;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 @Configuration
 @Import(DiscoveryServiceProperties.class)
-@Slf4j
 public class DiscoveryServiceAutoConfiguration {
     @Resource
     private Environment environment;
@@ -35,22 +35,33 @@ public class DiscoveryServiceAutoConfiguration {
         registerCurrentService();
         startActiveCurrentServiceSchedule();
         startRefreshServiceListSchedule();
+        CronUtil.setMatchSecond(true);
+        CronUtil.start();
     }
 
     private void startRefreshServiceListSchedule() {
+        Integer refreshServiceListInterval = discoveryServiceProperties.getRefreshServiceListInterval();
+        String cron = "*/" + refreshServiceListInterval + " * * * * *";
+        Integer serviceActiveTimeout = discoveryServiceProperties.getServiceActiveTimeout();
+        CronUtil.schedule(cron, (Task) () -> refreshServiceInstanceList(serviceActiveTimeout));
+    }
 
+    private void refreshServiceInstanceList(Integer serviceActiveTimeout) {
+        List<ServiceInstance> serviceInstanceList = dataHandler.findServiceInstanceList(serviceActiveTimeout);
+        if (!ObjectUtils.isEmpty(serviceInstanceList)) {
+            dataContext.refreshServiceInstances(serviceInstanceList);
+        }
     }
 
     private void startActiveCurrentServiceSchedule() {
         Integer serviceActiveInterval = discoveryServiceProperties.getServiceActiveInterval();
         String cron = "*/" + serviceActiveInterval + " * * * * *";
-        CronUtil.schedule(cron, (Task) () -> {
-            ServiceInstance serviceInstance = getServiceInstance();
-            dataHandler.activeService(serviceInstance);
-            log.debug("Active current service, name: {}, host:{}, port:{}", serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
-        });
-        CronUtil.setMatchSecond(true);
-        CronUtil.start();
+        CronUtil.schedule(cron, (Task) this::activeCurrentService);
+    }
+
+    private void activeCurrentService() {
+        ServiceInstance serviceInstance = getServiceInstance();
+        dataHandler.activeService(serviceInstance);
     }
 
     private void registerCurrentService() {
