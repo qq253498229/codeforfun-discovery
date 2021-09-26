@@ -1,0 +1,48 @@
+{
+  "groups": [
+    {
+      "name": "discovery.service",
+      "type": "cn.codeforfun.client.constants.DiscoveryServiceProperties",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "discovery.service.host",
+      "type": "java.lang.String",
+      "description": "服务地址,如果没设置会取本地ip",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    },
+    {
+      "name": "discovery.service.name",
+      "type": "java.lang.String",
+      "description": "服务名,如果没设置的话会取(spring.application.name)的值",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    },
+    {
+      "name": "discovery.service.port",
+      "type": "java.lang.Integer",
+      "description": "服务端口,如果没设置的话会取(server.port)的值,如果还是没有则默认8080",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    },
+    {
+      "name": "discovery.service.refresh-service-list-interval",
+      "type": "java.lang.Integer",
+      "description": "刷新服务列表间隔,单位:秒 每隔多长时间刷新一次服务列表",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    },
+    {
+      "name": "discovery.service.service-active-interval",
+      "type": "java.lang.Integer",
+      "description": "服务激活间隔,单位:秒 每隔多长时间激活一次自身服务",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    },
+    {
+      "name": "discovery.service.service-active-timeout",
+      "type": "java.lang.Integer",
+      "description": "服务激活超时时间,单位:秒 超过这个时间后该服务就会被认为是有故障的,之后就不会调用这个服务",
+      "sourceType": "cn.codeforfun.client.constants.DiscoveryServiceProperties"
+    }
+  ],
+  "hints": []
+}
