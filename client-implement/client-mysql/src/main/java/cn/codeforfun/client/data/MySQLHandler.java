@@ -30,7 +30,7 @@ public class MySQLHandler implements DataHandler {
     @Override
     public List<ServiceInstance> findServiceInstanceList(Integer serviceActiveTimeout) {
         long time = DateUtil.offsetSecond(new Date(), -serviceActiveTimeout).getTime();
-        String sql = "select id, name, remark, host, port, last_active from cff_service where last_active > ?";
+        String sql = "select name, remark, host, port, last_active from cff_service where last_active > ?";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             ServiceInstance serviceInstance = new ServiceInstance();
             serviceInstance.setName(rs.getString("name"));
