@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MicroService {
+public class ServiceInstance {
     private Long id;
     /**
      * 服务名

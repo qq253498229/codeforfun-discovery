@@ -12,17 +12,17 @@ public class MySQLHandler implements DataHandler {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public int registerService(MicroService microService) {
+    public int registerService(ServiceInstance serviceInstance) {
         return 0;
     }
 
     @Override
-    public List<MicroService> findServerList() {
+    public List<ServiceInstance> findServerList() {
         return null;
     }
 
     @Override
-    public List<MicroService> findServiceList() {
+    public List<ServiceInstance> findServiceList() {
         return null;
     }
 }

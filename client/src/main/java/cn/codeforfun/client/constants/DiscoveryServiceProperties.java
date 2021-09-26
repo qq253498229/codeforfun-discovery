@@ -20,4 +20,8 @@ public class DiscoveryServiceProperties {
      * 服务端口。如果没设置的话会取 (server.port) 的值，如果还是没有则默认8080
      */
     private Integer port;
+    /**
+     * 服务地址。如果没设置会取本地ip
+     */
+    private String host;
 }
