@@ -1,24 +1,20 @@
 package cn.codeforfun.client.data;
 
-import java.util.List;
-
 /**
  * 服务处理接口，需要手动实现
  */
 public interface DataHandler {
-    int registerService(ServiceInstance microService);
+    /**
+     * 注册服务
+     *
+     * @param serviceInstance 服务示例对象
+     */
+    void registerService(ServiceInstance serviceInstance);
 
     /**
-     * 获取服务（服务端）列表
+     * 激活服务
      *
-     * @return 服务端列表
+     * @param serviceInstance 服务示例对象
      */
-    List<ServiceInstance> findServerList();
-
-    /**
-     * 获取服务（客户端）列表
-     *
-     * @return 客户端列表
-     */
-    List<ServiceInstance> findServiceList();
+    void activeService(ServiceInstance serviceInstance);
 }

@@ -8,6 +8,7 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/codeforfun-discovery
-#logging:
-#  level:
-#    root: debug
+logging:
+  level:
+    #    root: debug
+    cn.codeforfun.client: debug

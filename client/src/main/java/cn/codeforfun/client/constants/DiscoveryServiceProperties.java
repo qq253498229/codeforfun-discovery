@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "discovery.service")
 public class DiscoveryServiceProperties {
     /**
-     * 健康检查间隔。单位: 秒
+     * 服务激活间隔。单位: 秒
      */
-    private Integer healthCheckInterval = 5;
+    private Integer serviceActiveInterval = 10;
     /**
      * 服务名。如果没设置的话会取 (spring.application.name) 的值
      */
