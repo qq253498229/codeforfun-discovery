@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +38,17 @@ public class DiscoveryServiceAutoConfiguration {
         startRefreshServiceListSchedule();
         CronUtil.setMatchSecond(true);
         CronUtil.start();
+    }
+
+    @PreDestroy
+    public void stop() {
+        CronUtil.stop();
+        deregisterCurrentService();
+    }
+
+    private void deregisterCurrentService() {
+        ServiceInstance serviceInstance = getServiceInstance();
+        dataHandler.deregisterService(serviceInstance);
     }
 
     private void startRefreshServiceListSchedule() {

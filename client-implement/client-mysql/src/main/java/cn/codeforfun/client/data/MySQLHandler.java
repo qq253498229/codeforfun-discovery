@@ -41,4 +41,14 @@ public class MySQLHandler implements DataHandler {
             return serviceInstance;
         }, time);
     }
+
+    @Override
+    public void deregisterService(ServiceInstance serviceInstance) {
+        String sql = "delete " +
+                "from cff_service " +
+                "where name = ? " +
+                "  and host = ? " +
+                "  and port = ?";
+        jdbcTemplate.update(sql, serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
+    }
 }
