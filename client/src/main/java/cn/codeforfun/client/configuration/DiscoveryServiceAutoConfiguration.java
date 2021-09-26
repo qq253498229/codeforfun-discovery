@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Configuration
 @Import(DiscoveryServiceProperties.class)
-public class DataContextConfiguration {
+public class DiscoveryServiceAutoConfiguration {
     @Resource
     private Environment environment;
     @Resource

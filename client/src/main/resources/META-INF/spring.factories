@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.codeforfun.client.configuration.DataContextConfiguration,\
+cn.codeforfun.client.configuration.DiscoveryServiceAutoConfiguration,\
 cn.codeforfun.client.data.DataContext
