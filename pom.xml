@@ -10,9 +10,8 @@
     </parent>
     <groupId>cn.codeforfun</groupId>
     <artifactId>codeforfun-discovery</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>codeforfun-discovery</name>
-    <description>Demo project for Spring Boot</description>
+    <version>1.0.0</version>
+    <name>codeforfun-discovery-dependency</name>
 
     <packaging>pom</packaging>
 
@@ -39,12 +38,12 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>client</artifactId>
+                <artifactId>discovery-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>client-mysql</artifactId>
+                <artifactId>discovery-client-mysql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
