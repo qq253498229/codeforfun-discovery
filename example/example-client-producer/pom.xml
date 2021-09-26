@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>client</artifactId>
+            <artifactId>client-mysql</artifactId>
         </dependency>
 
         <dependency>

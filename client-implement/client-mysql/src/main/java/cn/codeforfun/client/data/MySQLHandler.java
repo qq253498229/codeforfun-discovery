@@ -15,25 +15,28 @@ public class MySQLHandler implements DataHandler {
 
     @Override
     public void registerService(ServiceInstance serviceInstance) {
-        String sql = "insert ignore into cff_service (name, host, port, last_active) value ('"
-                + serviceInstance.getName() + "', '" + serviceInstance.getHost()
-                + "', " + serviceInstance.getPort() + ", now())";
-        jdbcTemplate.execute(sql);
+        String sql = "replace into cff_service (name, host, port, last_active) value (?, ?, ?, now())";
+        jdbcTemplate.update(sql, serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
     }
 
     @Override
     public void activeService(ServiceInstance serviceInstance) {
-        String sql = "insert ignore into cff_service (name, host, port, last_active) value ('"
-                + serviceInstance.getName() + "', '" + serviceInstance.getHost()
-                + "', " + serviceInstance.getPort() + ", now())";
-        jdbcTemplate.execute(sql);
+        String sql = "replace into cff_service (name, host, port, last_active) value (?, ?, ?, now())";
+        jdbcTemplate.update(sql, serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
     }
 
     @Override
     public List<ServiceInstance> findServiceInstanceList(Integer serviceActiveTimeout) {
         long time = DateUtil.offsetSecond(new Date(), -serviceActiveTimeout).getTime();
-        String sql = "select * from cff_service where last_active > " + time;
-        List<ServiceInstance> serviceInstanceList = jdbcTemplate.queryForList(sql, ServiceInstance.class);
-        return null;
+        String sql = "select id, name, remark, host, port, last_active from cff_service where last_active > ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            ServiceInstance serviceInstance = new ServiceInstance();
+            serviceInstance.setName(rs.getString("name"));
+            serviceInstance.setRemark(rs.getString("remark"));
+            serviceInstance.setHost(rs.getString("host"));
+            serviceInstance.setPort(rs.getInt("port"));
+            serviceInstance.setLastActive(new Date(rs.getTimestamp("last_active").getTime()));
+            return serviceInstance;
+        }, time);
     }
 }

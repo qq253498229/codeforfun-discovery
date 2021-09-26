@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: client-producer
-  cloud:
-    nacos:
-      server-addr: localhost:8848
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/codeforfun-discovery
