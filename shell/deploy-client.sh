@@ -1,0 +1,1 @@
+mvn -f ../pom.xml clean deploy -Dmaven.test.skip=true -pl client -pl client-implement/client-mysql
