@@ -15,13 +15,15 @@ public class MySQLHandler implements DataHandler {
 
     @Override
     public void registerService(ServiceInstance serviceInstance) {
-        String sql = "insert into cff_service (name, host, port, last_active) value (?, ?, ?, now()) " +
-                "on duplicate key update last_active=now()";
-        jdbcTemplate.update(sql, serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
+        activeCurrentService(serviceInstance);
     }
 
     @Override
     public void activeService(ServiceInstance serviceInstance) {
+        activeCurrentService(serviceInstance);
+    }
+
+    private void activeCurrentService(ServiceInstance serviceInstance) {
         String sql = "insert into cff_service (name, host, port, last_active) value (?, ?, ?, now()) " +
                 "on duplicate key update last_active=now()";
         jdbcTemplate.update(sql, serviceInstance.getName(), serviceInstance.getHost(), serviceInstance.getPort());
