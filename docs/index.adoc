@@ -1,0 +1,133 @@
+= 自定义服务发现
+王斌 <253498229@qq.com>
+v0.1, 2021-09-28
+:toc: left
+:toc-title: 目录
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 4
+:nofooter:
+:source-highlighter: coderay
+:version: 1.0.2
+
+== 快速开始
+
+=== 导入初始化表结构
+
+执行 client-implement/client-mysql/sql/schema.sql 数据库脚本导入初始化表结构。
+
+=== 加入Maven依赖
+
+分别在consumer和producer服务中加入依赖
+
+[source,xml,subs=attributes+]
+----
+<dependency>
+    <groupId>cn.codeforfun</groupId>
+    <artifactId>discovery-client-mysql</artifactId>
+    <version>{version}</version>
+</dependency>
+----
+
+=== 编写配置文件
+
+- consumer配置
+
+.application.yml
+[source,yaml,subs=attributes+]
+----
+server:
+  port: 50021
+spring:
+  application:
+    name: client-consumer
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/codeforfun-discovery
+----
+
+- producer配置
+
+.application.yml
+[source,yaml,subs=attributes+]
+----
+server:
+  port: 50011
+spring:
+  application:
+    name: client-producer
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/codeforfun-discovery
+----
+
+=== 编写服务调用代码
+
+- consumer允许FeignClient:
+
+----
+@EnableFeignClients(basePackages = "com.example.feign")
+----
+
+- consumer FeignClient:
+
+.com.example.feign.TestClient.java
+[source,java,subs=attributes+]
+----
+@FeignClient("client-producer")
+public interface TestClient {
+    @GetMapping("/test1")
+    String test1();
+}
+----
+
+- consumer接口
+
+.com.example.test.TestController.java
+[source,java,subs=attributes+]
+----
+@RestController
+public class TestController {
+    @Resource
+    TestClient testClient;
+
+    @GetMapping("/test")
+    public String test() {
+        return testClient.test1();
+    }
+}
+----
+
+- producer接口
+
+.TestController.java
+[source,java,subs=attributes+]
+----
+@RestController
+public class TestController {
+    @GetMapping("/test1")
+    public String test1() {
+        return "producer client test1";
+    }
+}
+----
+
+=== 启动服务
+
+分别启动producer和consumer服务，等待程序启动。
+
+访问 http://localhost:50011/test1 后显示 *producer client test1* 则表示成功。
+
+访问 http://localhost:50021/test 后同样显示 *producer client test1* 则表示成功。
+
+=== 示例代码
+
+示例代码在 example 目录下，example-client-producer为被调用方示例代码，example-client-consumer为调用方示例代码。
+
+== 目前支持的数据存储
+
+- MySQL
