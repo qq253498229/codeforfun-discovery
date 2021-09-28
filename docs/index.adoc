@@ -147,5 +147,5 @@ public class TestController {
 
 === MySQL配置项
 
-由于MySQL是使用 *mysql-connector-java* 和 *spring-boot-starter-jdbc* 实现的，所以配置项直接继承这两个。如果没用过的话，正常配置数据源就行了。
+由于MySQL是使用 *mysql-connector-java* 和 *spring-boot-starter-jdbc* 实现的，所以配置项也是直接继承这两个。没用过的话，正常配置数据源就行了。
 
