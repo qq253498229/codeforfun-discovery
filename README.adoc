@@ -1,1 +1,1 @@
-link:docs/index.adoc[Wiki]
+https://consolelog.gitee.io/codeforfun-discovery/[文档地址]
