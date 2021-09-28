@@ -131,3 +131,21 @@ public class TestController {
 == 目前支持的数据存储
 
 - MySQL
+
+== 配置项
+
+[%autowidth]
+|===
+| key | 说明 | 默认值
+| discovery.service.service-active-interval | 服务激活间隔,单位:秒。 每隔多长时间激活一次自身服务 | 10
+| discovery.service.refresh-service-list-interval | 刷新服务列表间隔,单位:秒。 每隔多长时间刷新一次服务列表 | 20
+| discovery.service.service-active-timeout | 服务激活超时时间,单位:秒。 超过这个时间后该服务就会被认为是有故障的,之后就不会调用这个服务 | 60
+| discovery.service.name | 服务名,如果没设置的话会取(spring.application.name)的值，如果都没有则报错 |
+| discovery.service.port | 服务端口,如果没设置的话会取(server.port)的值,如果还是没有则默认8080 | 8080
+| discovery.service.host | 服务地址,如果没设置会取本地ip | 本地ip
+|===
+
+=== MySQL配置项
+
+由于MySQL是使用 *mysql-connector-java* 和 *spring-boot-starter-jdbc* 实现的，所以配置项直接继承这两个。如果没用过的话，正常配置数据源就行了。
+
