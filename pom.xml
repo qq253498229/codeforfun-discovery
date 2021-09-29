@@ -12,8 +12,11 @@
     <modules>
         <module>client</module>
         <module>client-implement/client-mysql</module>
+        <module>client-implement/client-elasticsearch</module>
         <module>example/example-client-producer</module>
         <module>example/example-client-consumer</module>
+        <module>example/example-client-producer-elasticsearch</module>
+        <module>example/example-client-consumer-elasticsearch</module>
     </modules>
 
 </project>

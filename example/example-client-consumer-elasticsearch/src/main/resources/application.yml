@@ -1,0 +1,13 @@
+server:
+  port: 50021
+spring:
+  application:
+    name: client-consumer
+discovery:
+  service:
+    elasticsearch:
+      host: localhost
+      port: 59200
+feign:
+  circuitbreaker:
+    enabled: true
