@@ -8,7 +8,7 @@ v0.1, 2021-09-28
 :sectnumlevels: 4
 :nofooter:
 :source-highlighter: coderay
-:version: 1.0.2
+:version: 1.0.3
 
 == 快速开始
 
