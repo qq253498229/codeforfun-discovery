@@ -9,12 +9,13 @@ import cn.codeforfun.client.exception.ServiceNameNotFoundException;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.cron.CronUtil;
 import cn.hutool.cron.task.Task;
+import org.springframework.boot.web.context.WebServerInitializedEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ObjectUtils;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Objects;
 
 @Configuration
 @Import(DiscoveryServiceProperties.class)
-public class DiscoveryServiceAutoConfiguration {
+public class DiscoveryServiceAutoConfiguration implements ApplicationListener<WebServerInitializedEvent> {
     @Resource
     private Environment environment;
     @Resource
@@ -34,8 +35,11 @@ public class DiscoveryServiceAutoConfiguration {
     @Resource
     private DiscoveryServiceProperties discoveryServiceProperties;
 
-    @PostConstruct
-    public void start() {
+    WebServerInitializedEvent event;
+
+    @Override
+    public void onApplicationEvent(WebServerInitializedEvent event) {
+        this.event = event;
         registerCurrentService();
         startActiveCurrentServiceSchedule();
         startRefreshServiceListSchedule();
@@ -104,11 +108,13 @@ public class DiscoveryServiceAutoConfiguration {
     }
 
     private Integer getPort() {
-        Integer port = 8080;
+        Integer port;
         if (discoveryServiceProperties.getPort() != null) {
             port = discoveryServiceProperties.getPort();
-        } else if (environment.getProperty("server.port") != null) {
+        } else if (environment.getProperty("server.port") != null && !"0".equals(environment.getProperty("server.port"))) {
             port = Integer.valueOf(Objects.requireNonNull(environment.getProperty("server.port")));
+        } else {
+            port = event.getWebServer().getPort();
         }
         return port;
     }
