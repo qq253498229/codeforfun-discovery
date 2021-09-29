@@ -12,3 +12,6 @@ logging:
   level:
     #    root: debug
     cn.codeforfun.client: debug
+feign:
+  circuitbreaker:
+    enabled: true
