@@ -20,9 +20,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>cn.codeforfun</groupId>
             <artifactId>discovery-client-mysql</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>
