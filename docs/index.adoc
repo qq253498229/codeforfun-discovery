@@ -131,6 +131,7 @@ public class TestController {
 == 目前支持的数据存储
 
 - MySQL
+- ElasticSearch
 
 == 配置项
 
@@ -148,4 +149,15 @@ public class TestController {
 === MySQL配置项
 
 由于MySQL是使用 *mysql-connector-java* 和 *spring-boot-starter-jdbc* 实现的，所以配置项也是直接继承这两个。没用过的话，正常配置数据源就行了。
+
+=== ElasticSearch配置项
+
+由于ElasticSearch是使用 *spring-boot-starter-data-elasticsearch* 实现的，所以配置项也是直接继承下来的。
+
+== 源码地址
+
+https://gitee.com/consolelog/codeforfun-discovery[GitEE仓库]、
+https://github.com/qq253498229/codeforfun-discovery[Github仓库]。
+以GitEE为主.
+
 
