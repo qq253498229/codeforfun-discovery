@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/codeforfun-discovery
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: client-producer
+          uri: lb://client-producer
+          predicates:
+            - Path=/api/client-producer/**
+server:
+  port: 50001

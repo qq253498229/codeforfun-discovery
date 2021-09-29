@@ -2,6 +2,7 @@ package cn.codeforfun.client.configuration;
 
 import cn.codeforfun.client.constants.DiscoveryServiceProperties;
 import cn.codeforfun.client.data.DataContext;
+import cn.codeforfun.client.data.DataContextReactive;
 import cn.codeforfun.client.data.DataHandler;
 import cn.codeforfun.client.data.ServiceInstance;
 import cn.codeforfun.client.exception.ServiceNameNotFoundException;
@@ -28,6 +29,8 @@ public class DiscoveryServiceAutoConfiguration {
     private DataHandler dataHandler;
     @Resource
     private DataContext dataContext;
+    @Resource
+    private DataContextReactive dataContextReactive;
     @Resource
     private DiscoveryServiceProperties discoveryServiceProperties;
 
@@ -62,6 +65,7 @@ public class DiscoveryServiceAutoConfiguration {
         List<ServiceInstance> serviceInstanceList = dataHandler.findServiceInstanceList(serviceActiveTimeout);
         if (!ObjectUtils.isEmpty(serviceInstanceList)) {
             dataContext.refreshServiceInstances(serviceInstanceList);
+            dataContextReactive.refreshServiceInstances(serviceInstanceList);
         }
     }
 
